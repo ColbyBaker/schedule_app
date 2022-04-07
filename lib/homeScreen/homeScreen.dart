@@ -12,13 +12,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<BottomNavigationBarItem> navbarItems = [
-    BottomNavigationBarItem(
+    const BottomNavigationBarItem(
       icon: Icon(
         FontAwesomeIcons.calendar,
       ),
       label: 'Calendar',
     ),
-    BottomNavigationBarItem(
+    const BottomNavigationBarItem(
       icon: Icon(FontAwesomeIcons.list),
       label: 'Events',
     ),
@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(),
       body: PageView(
-        children: [
+        children: const [
           Calendar(),
           EventList(),
         ],
@@ -42,12 +42,17 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         },
       ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/add-event');
+          },
+          child: Icon(FontAwesomeIcons.plus, color: Colors.white)),
       bottomNavigationBar: BottomNavigationBar(
         items: navbarItems,
         currentIndex: _currentIndex,
         onTap: (int index) {
           _pageController.animateToPage(index,
-              duration: Duration(milliseconds: 500), curve: Curves.ease);
+              duration: Duration(milliseconds: 400), curve: Curves.ease);
         },
       ),
     );

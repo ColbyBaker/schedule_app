@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "813703326037",
+    "project_id": "schedule-app-4ff65",
+    "storage_bucket": "schedule-app-4ff65.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:813703326037:android:90496826b53a4d6255e7dc",
+        "android_client_info": {
+          "package_name": "com.colbybaker.schedule_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "813703326037-2ao89en435eak8ohes3ve5gpb0t61cnh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.colbybaker.schedule_app",
+            "certificate_hash": "5296afef33fe415942190aae86c170cf4de52810"
+          }
+        },
+        {
+          "client_id": "813703326037-oka7b17h575k0mui5elq5tmd4jvfc00e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA29JWhXjcufNV5ynJfac0p7OvnSU9nHLE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "813703326037-oka7b17h575k0mui5elq5tmd4jvfc00e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "813703326037-9ugppi2ju07vnrd3qdbvdlgotjb05d8g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.colbybaker.schedule-app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
