@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:schedule_app/addEvent/addEvent.dart';
 import 'package:schedule_app/calendar/calendar.dart';
 import 'package:schedule_app/eventList/eventList.dart';
+import 'package:schedule_app/shared/event.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -11,6 +13,46 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<Event> eventList = [
+    Event(
+        dateTime: DateTime.now(),
+        title: "thing",
+        location: "Orlando",
+        description:
+            "It is high time I finally add even more stuff to this description"),
+    Event(
+        dateTime: DateTime.now(),
+        title: "thing",
+        location: "Florida",
+        description:
+            "It is high time I finally add even more stuff to this description. This description is extra lucky and gets even more than the others!"),
+    Event(
+        dateTime: DateTime.now(),
+        title: "thing",
+        location: "thing",
+        description:
+            "It is high time I finally add even more stuff to this description"),
+    Event(
+        dateTime: DateTime.now(),
+        title: "thing",
+        location: "St. George",
+        description:
+            "It is high time I finally add even more stuff to this description")
+  ];
+
+  addEvent(Event newEvent) {
+    setState(() {
+      eventList.add(newEvent);
+      eventList.sort((a, b) => a.dateTime.compareTo(b.dateTime));
+    });
+  }
+
+  removeEvent(int index) {
+    setState(() {
+      eventList.removeAt(index);
+    });
+  }
+
   List<BottomNavigationBarItem> navbarItems = [
     const BottomNavigationBarItem(
       icon: Icon(
@@ -24,16 +66,22 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
   ];
   int _currentIndex = 0;
-  PageController _pageController = PageController(initialPage: 0);
+  final PageController _pageController = PageController(initialPage: 0);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       body: PageView(
-        children: const [
-          Calendar(),
-          EventList(),
+        children: [
+          Calendar(
+            eventList: eventList,
+            removeEvent: removeEvent,
+          ),
+          EventList(
+            eventList: eventList,
+            removeEvent: removeEvent,
+          ),
         ],
         controller: _pageController,
         onPageChanged: (int newIndex) {
@@ -44,7 +92,11 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/add-event');
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddEventScreen(addEvent: addEvent),
+                ));
           },
           child: Icon(FontAwesomeIcons.plus, color: Colors.white)),
       bottomNavigationBar: BottomNavigationBar(
