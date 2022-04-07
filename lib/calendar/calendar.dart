@@ -6,8 +6,13 @@ import 'package:intl/intl.dart';
 
 class Calendar extends StatefulWidget {
   final List<Event> eventList;
+  final Function addEvent;
   final Function removeEvent;
-  const Calendar({Key? key, required this.eventList, required this.removeEvent})
+  const Calendar(
+      {Key? key,
+      required this.eventList,
+      required this.addEvent,
+      required this.removeEvent})
       : super(key: key);
 
   @override
@@ -62,6 +67,7 @@ class _CalendarState extends State<Calendar> {
         Expanded(
           child: EventList(
               eventList: getEventsOnDate(_selectedDay),
+              addEvent: widget.addEvent,
               removeEvent: widget.removeEvent),
           flex: 8,
         )

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:schedule_app/eventView/eventView.dart';
 import 'package:schedule_app/shared/event.dart';
 import 'package:intl/intl.dart';
+import 'package:schedule_app/addEvent/addEvent.dart';
 
 class EventList extends StatelessWidget {
   final List<Event> eventList;
+  final Function addEvent;
   final Function removeEvent;
   const EventList(
-      {Key? key, required this.eventList, required this.removeEvent})
+      {Key? key,
+      required this.eventList,
+      required this.addEvent,
+      required this.removeEvent})
       : super(key: key);
 
   @override
@@ -38,7 +41,20 @@ class EventList extends StatelessWidget {
             trailing: PopupMenuButton(
               icon: Icon(Icons.more_vert),
               itemBuilder: (context) => [
-                PopupMenuItem(child: Text('Edit')),
+                PopupMenuItem(
+                  child: Text('Edit'),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AddEventScreen(
+                            addEvent: addEvent,
+                            removeEvent: removeEvent,
+                            previousEventIndex: index,
+                          ),
+                        ));
+                  },
+                ),
                 PopupMenuItem(
                   child: Text('Delete'),
                   onTap: () => removeEvent(index),

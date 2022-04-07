@@ -76,10 +76,12 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Calendar(
             eventList: eventList,
+            addEvent: addEvent,
             removeEvent: removeEvent,
           ),
           EventList(
             eventList: eventList,
+            addEvent: addEvent,
             removeEvent: removeEvent,
           ),
         ],
@@ -95,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AddEventScreen(addEvent: addEvent),
+                  builder: (context) => AddEventScreen(addEvent: addEvent, removeEvent: removeEvent,
                 ));
           },
           child: Icon(FontAwesomeIcons.plus, color: Colors.white)),

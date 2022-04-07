@@ -16,10 +16,16 @@ final Iterable<DropdownMenuItem<String>> locationMenuItems =
 });
 
 class AddEventScreen extends StatefulWidget {
-  Function(Event event) addEvent;
+  final Function addEvent;
+  final Function removeEvent;
+  Event? previousEvent;
+  int? previousEventIndex;
   AddEventScreen({
     Key? key,
     required this.addEvent,
+    required this.removeEvent,
+    this.previousEvent,
+    this.previousEventIndex,
   }) : super(key: key);
 
   @override
@@ -28,10 +34,24 @@ class AddEventScreen extends StatefulWidget {
 
 class _AddEventScreenState extends State<AddEventScreen> {
   //State variables needed for Event Creation
-  final TextEditingController _titleController = TextEditingController();
-  DateTime _selectedDateTime = DateTime.now();
-  String? _location = null;
-  final TextEditingController _descriptionController = TextEditingController();
+  late TextEditingController _titleController = TextEditingController();
+  late DateTime _selectedDateTime = DateTime.now();
+  late String? _location = null;
+  late final TextEditingController _descriptionController =
+      TextEditingController();
+
+  @protected
+  @mustCallSuper
+  void initState() {
+    super.initState();
+    if (widget.previousEvent != null) {
+      Event prev = widget.previousEvent!;
+      _titleController.text = prev.title;
+      _selectedDateTime = prev.dateTime;
+      _location = prev.location;
+      _descriptionController.text = prev.description;
+    }
+  }
 
   _selectDate(BuildContext context) async {
     final DateTime? newDate = await showDatePicker(
@@ -166,6 +186,9 @@ class _AddEventScreenState extends State<AddEventScreen> {
                       height: 60,
                       child: ElevatedButton(
                         onPressed: () {
+                          if (widget.previousEvent != null) {
+                            widget.removeEvent(widget.previousEventIndex);
+                          }
                           widget.addEvent(Event(
                             title: _titleController.text,
                             dateTime: _selectedDateTime,
