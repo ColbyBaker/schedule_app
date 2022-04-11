@@ -13,32 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Event> eventList = [
-    Event(
-        dateTime: DateTime.now(),
-        title: "thing",
-        location: "Orlando",
-        description:
-            "It is high time I finally add even more stuff to this description"),
-    Event(
-        dateTime: DateTime.now(),
-        title: "thing",
-        location: "Florida",
-        description:
-            "It is high time I finally add even more stuff to this description. This description is extra lucky and gets even more than the others!"),
-    Event(
-        dateTime: DateTime.now(),
-        title: "thing",
-        location: "thing",
-        description:
-            "It is high time I finally add even more stuff to this description"),
-    Event(
-        dateTime: DateTime.now(),
-        title: "thing",
-        location: "St. George",
-        description:
-            "It is high time I finally add even more stuff to this description")
-  ];
+  List<Event> eventList = [];
 
   addEvent(Event newEvent) {
     setState(() {
@@ -97,7 +72,10 @@ class _HomeScreenState extends State<HomeScreen> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AddEventScreen(addEvent: addEvent, removeEvent: removeEvent,
+                  builder: (context) => AddEventScreen(
+                    addEvent: addEvent,
+                    removeEvent: removeEvent,
+                  ),
                 ));
           },
           child: Icon(FontAwesomeIcons.plus, color: Colors.white)),
